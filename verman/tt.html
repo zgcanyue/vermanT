@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+<style>
+div{border: 1px solid red; display: inline-block;}
+#a{width: 100px; height: 100px;}
+</style>
+<div id="a">a</div>
+<div id="b">b</div>
+
+<script>
+var a=document.getElementById('a');
+var b=document.getElementById('b');
+var aw=a.offsetWidth+'px';
+var ah=a.offsetHeight+'px';
+b.style.width=aw;
+b.style.height=ah;
+</script>
+    </body>
+    </html>

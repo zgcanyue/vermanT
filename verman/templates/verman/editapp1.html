@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Edit</title>
+		<link href="../../static/verman1/css/Site.css" rel="stylesheet" type="text/css" />
+		<link href="../../static/verman1/css/zy.layout.css" rel="stylesheet" />
+		<link href="../../static/verman1/css/zy.form.css" rel="stylesheet" />
+		<link href="../../static/verman1/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="../../static/verman1/css/zy.menu.css" rel="stylesheet" />
+		<style type="text/css">
+			.hide_top{
+        		height:60px;
+        		font-size:24px;
+        		padding-left:10px;
+        		margin-left:100px;
+        	}
+        	.hide_body{
+        		height:400px;
+        		margin-left:100px;
+        	}
+        	.hide_footer{
+        		float:left;
+        		margin-left:500px;
+        	}
+        	.control-group{
+        		height:60px;
+        		margin-top:20px;
+        	}
+        	.control-label{
+        		float:left;
+        		width:80px;
+        		margin-left:50px;
+        		text-align:right;
+        		font-size:18px;
+        		padding-top:10px;
+        	}
+        	.input-xlarge{
+        		margin-left:50px;
+        		height:40px;
+        		width:400px;
+
+        	}
+        	.cencel{
+                height:38px;
+                width:60px;
+                background-color:#c6e2ff;
+                border:1px solid #438EB9;
+                float:left;
+                text-align:center;
+        		line-height:40px;
+        		margin-right:10px;
+        	}
+		</style>
+		<link href="../../static/verman1/css/zy.menu.css" rel="stylesheet" />
+	</head>
+        <div id="light" class="white_content">
+            <div class="hide_top">编辑</div>
+            {% for date in edit %}
+            <form method="post" action="/verman/editok1/" enctype="multipart/form-data">
+
+						<div class="hide_body">
+							<input type="hidden" name="id" value="{{date.id}}">
+						<div class="control-group">
+							<label class="control-label" for="appname">App名</label>
+							<div class="controls">
+								<input type="text" name="appname" class="input-xlarge" id="appname" value="{{ date.app_name}}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="adnroid">Adnroid</label>
+							<div class="controls">
+								<input type="text" name="adnroid" class="input-xlarge" id="adnroid" value="{{date.adnroid}}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="ios">Ios</label>
+							<div class="controls">
+								<input type="text" name="ios" class="input-xlarge" id="ios" value="{{date.ios}}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="address">后台地址</label>
+							<div class="controls">
+								<input type="text" name="address" class="input-xlarge" id="address" value="{{date.address}}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="testaccount">测试账号</label>
+							<div class="controls">
+								<input type="text" name="testaccount" class="input-xlarge" id="testaccount" value="{{date.test_account}}"/>
+							</div>
+						</div>
+
+						</div>
+						<div class="hide_footer">
+                            <div class="cencel"><a href="/verman/app1">取消</a></div>
+							<input type="submit"  value="确定">
+						</div>
+
+            </form>
+            {% endfor %}
+					</div>
+	<body>
+
+		<script src="../../static/verman1/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+		<script src="../../static/verman1/js/plugs/Jqueryplugs.js" type="text/javascript"></script>
+		<script src="../../static/verman1/js/_layout.js"></script>
+
+
+
+	</body>
+
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" />
+		<link rel="stylesheet" href="../../static/verman1/css/Site.css" />
+		<link rel="stylesheet" href="../../static/verman1/css/zy.all.css" />
+		<link rel="stylesheet" href="../../static/verman1/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../static/verman1/css/amazeui.min.css" />
+		<link rel="stylesheet" href="../../static/verman1/css/admin.css" />
+		<style>
+			.add{
+				width:50px;
+				height:50px;
+				float:right;
+				margin-right:30px;
+				margin-top:10px;
+			}
+			 .black_overlay{
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index:1001;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=88);
+        	}
+        	.white_content {
+            display: none;
+            position: absolute;
+            top: 5%;
+            left: 25%;
+            width: 55%;
+            height: 55%;
+            padding: 20px;
+            background-color: white;
+            z-index:1002;
+            overflow: auto;
+        	}
+        	.hide_top{
+        		height:60px;
+        		font-size:24px;
+        		padding-left:10px;
+        	}
+        	.hide_body{
+        		height:400px;
+        	}
+        	.hide_footer{
+        		float:left;
+        		margin-left:500px;
+        	}
+        	.control-group{
+        		height:60px;
+        		margin-top:20px;
+        	}
+        	.control-label{
+        		float:left;
+        		width:80px;
+        		margin-left:50px;
+        		text-align:right;
+        		font-size:18px;
+        	}
+        	.input-xlarge{
+        		margin-left:50px;
+        		height:40px;
+        		width:400px;
+        	}
+		</style>
+	<body>
+		<div class="dvcontent">
+
+			<div>
+				<!--tab start-->
+				<div class="tabs">
+					<div class="hd">
+						管理列表
+					</div>
+    <script type="text/javascript">
+        function opendiv(){
+            document.getElementById('light').style.display='block';
+            document.getElementById('fade').style.display='block';
+        }
+        function closediv(){
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none';
+        }
+        function showEditor(appInfo){
+        	console.log(appInfo);
+        	opendiv1();
+        	<!--document.forms['app1'].action='/verman/editapp1/';-->
+        	<!--document.getElementById("edit").innertext=appInfo.ios;-->
+        	document.getElementById("editid").value = appInfo.id;
+        	document.getElementById("appname1").value = appInfo.app_name;
+        	document.getElementById("adnroid1").value = appInfo.adnroid;
+        	document.getElementById("ios1").value = appInfo.ios;
+        	document.getElementById("address1").value = appInfo.address;
+        	document.getElementById("testaccount1").value = appInfo.test_account;
+
+        }
+
+        function opendiv1(){
+            document.getElementById('light1').style.display='block';
+            document.getElementById('fade1').style.display='block';
+        }
+        function closediv1(){
+            document.getElementById('light1').style.display='none';
+            document.getElementById('fade1').style.display='none';
+        }
+    </script>
+					<div class="add">
+						<input type="button" onclick="opendiv()" value="添加">
+					</div>
+					<!--隐藏窗口add-->
+
+					<div id="light" class="white_content">
+						<div class="hide_top">添加</div>
+
+						<form method="post" action="/verman/addapp1/" name="app1" enctype="multipart/form-data" >
+
+						<div class="hide_body">
+						<div class="control-group">
+							<label class="control-label" for="appname">App名</label>
+							<div class="controls">
+								<input type="text" name="appname" class="input-xlarge" id="appname" value="{{date.app_name}}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="adnroid">Adnroid</label>
+							<div class="controls">
+								<input type="text" name="adnroid" class="input-xlarge" id="adnroid" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="ios">Ios</label>
+							<div class="controls">
+								<input type="text" name="ios" class="input-xlarge" id="ios" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="address">后台地址</label>
+							<div class="controls">
+								<input type="text" name="address" class="input-xlarge" id="address" value="自动填充 127.0.0.1"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="testaccount">测试账号</label>
+							<div class="controls">
+								<input type="text" name="testaccount" class="input-xlarge" id="testaccount" value="自动填充 admin"/>
+							</div>
+						</div>
+
+						</div>
+
+						<div class="hide_footer">
+							<input type="button" onclick="closediv()" value="取消">
+							<input type="submit"  value="确定">
+						</div>
+
+					</form>
+
+					</div>
+
+					<div id="fade" class="black_overlay"></div>
+					<!--隐藏窗口end-->
+
+
+					<!--隐藏窗口edit-->
+
+					<div id="light1" class="white_content">
+						<div class="hide_top">编辑</div>
+
+						<form method="post" action="/verman/editok1/" name="editapp1" enctype="multipart/form-data" >
+
+						<div class="hide_body">
+
+							<input type="hidden" name="id" id="editid" >
+						<div class="control-group">
+							<label class="control-label" for="appname1">App名</label>
+							<div class="controls">
+								<input type="text" name="appname1" class="input-xlarge" id="appname1" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="adnroid1">Adnroid</label>
+							<div class="controls">
+								<input type="text" name="adnroid1" class="input-xlarge" id="adnroid1" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="ios1">Ios</label>
+							<div class="controls">
+								<input type="text" name="ios1" class="input-xlarge" id="ios1" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="address1">后台地址</label>
+							<div class="controls">
+								<input type="text" name="address1" class="input-xlarge" id="address1"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="testaccount1">测试账号</label>
+							<div class="controls">
+								<input type="text" name="testaccount1" class="input-xlarge" id="testaccount1" />
+							</div>
+						</div>
+
+						</div>
+
+						<div class="hide_footer">
+							<input type="button" onclick="closediv1()" value="取消">
+							<input type="submit"  value="确定">
+						</div>
+
+					</form>
+
+					</div>
+
+					<div id="fade1" class="black_overlay"></div>
+					<!--隐藏窗口end-->
+
+					<div class="bd">
+						<ul style="display: block;padding: 20px;">
+							<li>
+								<div id="dv1">
+									<table class="table" id="tbRecord">
+										<thead>
+											<tr>
+												<th>App名</th>
+												<th>Adnroid</th>
+												<th>IOS</th>
+												<th>后台地址</th>
+												<th>测试账号</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for app in apps %}
+											<tr>
+												<td>{{ app.app_name }}</td>
+												<td><a href="/verman/download" download="adnroid.txt">{{ app.adnroid }}</a></td>
+												<td><a href="/verman/download" download="ios.txt">{{app.ios}}</a></td>
+												<td>{{ app.address }}</td>
+												<td>{{ app.test_account }}</td>
+												<td class="delete">
+												<!--<a href="/verman/editapp1/?id={{app.id}}"> 编辑 | </a>-->
+													<!--<a onclick='showEditor({{app|safe}})'> 编辑 | </a>-->
+													<a onclick='showEditor({{app|safe}})'>编辑 |</a>
+													<a href="/verman/delapp1/?id={{app.id}}" onclick="return confirm('确认要删除吗？')"> 删除</a>
+											</tr>
+											{% endfor %}
+										</tbody>
+									
+									</table>
+								</div>
+
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--tab end-->
+
+			</div>
+			 <script src="../../static/verman1/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+              <script src="../../static/verman1/js/plugs/Jqueryplugs.js" type="text/javascript"></script>
+              <script src="../../static/verman1/js/_layout.js"></script>
+             <script src="../../static/verman1/js/plugs/jquery.SuperSlide.source.js"></script>
+
+		</div>
+	</body>
+
+</html>
