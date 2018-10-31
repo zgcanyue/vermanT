@@ -25,6 +25,7 @@ def get_user(request):
     username = request.user
     return username
 
+'''
 #注册
 def regist(request):
     if request.method == 'POST':
@@ -128,7 +129,7 @@ def EditOk(request):
 def userlogout(request):
     logout(request)
     return HttpResponseRedirect('/verman/login/')
-
+'''
 
 #-----------------------new-----------------------
 
@@ -280,7 +281,7 @@ def edituserok1(request):
 @login_required
 def logout1(request):
     logout(request)
-    return HttpResponseRedirect('/verman/login/')
+    return HttpResponseRedirect('/verman/login1/')
 
 def page_not_found(request):
     return render(request,'verman/404.html')
