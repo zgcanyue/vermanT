@@ -136,18 +136,25 @@ def userlogout(request):
 #登录
 def login1(request):
     if request.method == 'POST':
-            username = request.POST.get('username_l')
-            password = request.POST.get('password_l')
-            user = authenticate(username=username,password=password)
-            if user is not None:
+        username = request.POST.get('username_l')
+        password = request.POST.get('password_l')
+        user = authenticate(username=username,password=password)
+        error_msg = ""
+        if user :
                 #login()方法验证的是django自带模块admin里注册的用户
-                login(request,user)
-                # ip = get_ip(request)
-                # user = User(ip_address=ip)
-                # user.save()
-                return redirect(reverse('verman:index1'))
+            login(request,user)
+            #办不到
+            # ip = get_ip(request)
+            # loginip = AppDate(ip_address=ip)
+            # loginip.save()
+            return redirect(reverse('verman:index1'))
+        else:
+            if username is "" or password is "":
+                error_msg = "用户名或密码不能为空"
+                #return render_to_response('verman/login.html', {'error_msg': error_msg})
             else:
-                return HttpResponseRedirect('/verman/login1/')
+                error_msg = "用户名或密码错误"
+            return render_to_response('verman/login.html', {'error_msg': error_msg})
     return render_to_response('verman/login.html')
 
 @login_required
@@ -232,8 +239,14 @@ def adduser1(request):
         username = request.POST.get('username_r')
         password = request.POST.get('password_r')
         email = request.POST.get('email_r')
-        User.objects.create_user(username=username, password=password, email=email)
-        return redirect(reverse('verman:user1'))
+        checkuser = User.objects.filter(username=username)
+        if username is "" or password is "":
+            return HttpResponse('用户名或密码不能为空')
+        if checkuser :
+            return HttpResponse('用户名已存在，请更换用户名')
+        else:
+            User.objects.create_user(username=username, password=password, email=email)
+            return redirect(reverse('verman:user1'))
     else:
         return HttpResponse('管理员才能添加账号！')
     #return redirect(reverse('verman:user1'))
@@ -246,12 +259,14 @@ def deluser1(request):
     # 获取当前登录用户，判断是否有权限删除
     user = get_user(request)
     id = request.GET.get('id')
+    # us = User.objects.get(id=id).username
     #if User.objects.get(id=id).is_superuser:
     if user.is_superuser:
         User.objects.filter(id=id).delete()
         return redirect(reverse('verman:user1'))
     else:
         return HttpResponse("你没有权限删除！！！")
+    #return render(request,'verman/user1.html',{'getid':us})
 
 @login_required
 def edituser1(request):
@@ -271,20 +286,31 @@ def edituserok1(request):
     username = request.POST.get('username_r')
     password = request.POST.get('password_r')
     email = request.POST.get('email_r')
-    if username and password and email:
+    #判断用户名是否存在
+    checkuser = User.objects.filter(username=username)
+    cuuser = User.objects.get(id=id).username
+    if username is "":
+        return HttpResponse('用户名不能为空')
+    if cuuser != username and checkuser:
+        return HttpResponse('用户名已存在，请更换用户名')
+    # if username and password and email:
+    else:
         User.objects.filter(id=id).update(username=username, email=email)
-        user = User.objects.get(username=username)
-        user.set_password(password)
-        user.save()
+        if password is not "":
+            user = User.objects.get(username=username)
+            user.set_password(password)
+            user.save()
     return redirect(reverse('verman:user1'))
 
 @login_required
 def logout1(request):
     logout(request)
-    return HttpResponseRedirect('/verman/login1/')
+    #return HttpResponseRedirect('/verman/index1/')
+    return redirect(reverse('verman:index1'))
 
 def page_not_found(request):
     return render(request,'verman/404.html')
 
+@login_required
 def download(request):
     return render(request,'verman/download.txt')

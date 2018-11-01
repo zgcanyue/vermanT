@@ -21,6 +21,7 @@ class AppDate(models.Model):
     address = models.CharField(max_length=50)
     test_account = models.CharField(max_length=50)
 
+
     def __str__(self):
         return json.dumps({"id":self.id,"app_name":self.app_name,"adnroid":self.adnroid,
                            "ios":self.ios,"address":self.address,"test_account":self.test_account })

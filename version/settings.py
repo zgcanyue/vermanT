@@ -25,8 +25,8 @@ SECRET_KEY = '(c&-0$^=bhexj9406%x7b9uoxiy+7vt=aoswl*q@ajcy4r3=l('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #切换开发和生产环境  --insecure
-DEBUG = True
-ALLOWED_HOSTS = ['*']
+DEBUG = False
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -129,6 +129,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+#未登录情况默认跳转到登录页面
+LOGIN_URL = '/verman/login1'
 
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR,'static')
